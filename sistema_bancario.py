@@ -8,7 +8,6 @@ menu = """
 
 LIMITE_SAQUES = 3
 MAXIMO_SAQUE = 500.0
-OPCOES = ("D", "S", "E", "Q")
 saques = 0
 saldo = 0.0
 extrato = []
@@ -48,12 +47,12 @@ def sacar():
     
     valor = float(input("Digite o valor do saque: "))
         
-    while valor > saldo:
-        print(f"Saldo insuficiente! (Saldo atual: {saldo})")
-        valor = float(input("Digite o valor do saque: "))
-        
-    while valor > MAXIMO_SAQUE:
-        print(f"O valor do saque deve ser menor que R${MAXIMO_SAQUE}")
+    while valor > saldo or valor > MAXIMO_SAQUE or valor < 0:
+        if valor > saldo:
+            print(f"Saldo insuficiente! (Saldo atual: {saldo})")
+        elif valor > MAXIMO_SAQUE or valor < 0:
+            print(f"O valor do saque deve ser menor que R${MAXIMO_SAQUE} e maior que zero!")
+            
         valor = float(input("Digite o valor do saque: "))
         
     saques += 1
